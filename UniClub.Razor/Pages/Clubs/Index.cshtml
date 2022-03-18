@@ -18,10 +18,9 @@
             Search:
             <input asp-for="@Model.Dto.UniId" hidden/>
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
-            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<UniversityProperties>()">
-                <option value="">Sort by</option>
+            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<ClubProperties>()">
             </select> |
-            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            Is Ascending <input asp-for="@Model.Dto.IsAscending"/> |
             <select asp-for="Dto.PageSize">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -71,25 +70,25 @@
                 <img src="@item.AvatarUrl" class="img-fluid" alt="Club Avatar">
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].ClubName)
+                @Html.DisplayFor(model => item.ClubName)
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].ShortName)
+                @Html.DisplayFor(model => item.ShortName)
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].Description)
+                @Html.DisplayFor(model => item.Description)
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].ShortDescription)
+                @Html.DisplayFor(model => item.ShortDescription)
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].EstablishedDate)
+                @item.EstablishedDate.ToString("dd/MM/yyyy")
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].MemberCount)
+                @Html.DisplayFor(model => item.MemberCount)
             </th>
             <th>
-                @Html.DisplayFor(model => model.Clubs.Items[0].Slogan)
+                @Html.DisplayFor(model => item.Slogan)
             </th>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

@@ -110,7 +110,7 @@ namespace UniClub.EntityFrameworkCore.Identity
 
         public async Task<Result> UpdateUserAsync(string userId, Person updatedUser)
         {
-            var user = _userManager.Users.SingleOrDefault(u => u.Id.ToString() == userId);
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return Result.Failure(new List<string>() { "User does not exist" });

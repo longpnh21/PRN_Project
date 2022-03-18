@@ -21,6 +21,7 @@ namespace UniClub.Queries.GetById.Handlers
         }
         public async Task<ClubPeriodDto> Handle(GetClubPeriodByIdDto request, CancellationToken cancellationToken)
         {
+            var x = await _clubPeriodRepository.GetByIdAsync(cancellationToken, new GetClubPeriodByIdQuerySpecification(request));
             return _mapper.Map<ClubPeriodDto>(await _clubPeriodRepository.GetByIdAsync(cancellationToken, new GetClubPeriodByIdQuerySpecification(request)));
         }
     }

@@ -3,8 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
-using UniClub.Dtos.Create;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Update;
 
@@ -22,7 +22,7 @@ namespace UniClub.Razor.Pages.Universities
         }
         public async Task<IActionResult> OnGet(int? id)
         {
-            if (id == null)
+            if (id == null || id < 1)
             {
                 return NotFound();
             }
@@ -35,19 +35,29 @@ namespace UniClub.Razor.Pages.Universities
             }
             return Page();
         }
+        public string Message { get; set; }
 
         [BindProperty]
         public UpdateUniversityDto University { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                await Mediator.Send(University);
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+                Message.Replace("--", "--\n");
                 return Page();
             }
-
-            await Mediator.Send(University);
-
-            return RedirectToPage("./Index");
         }
     }
 }

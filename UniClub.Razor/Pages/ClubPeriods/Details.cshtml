@@ -1,0 +1,49 @@
+﻿@page
+@model UniClub.Razor.Pages.ClubPeriods.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ClubPeriod</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubPeriod.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClubPeriod.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubPeriod.ClubId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClubPeriod.ClubId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubPeriod.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClubPeriod.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubPeriod.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ClubPeriod.StartDate.ToString("dd/MM/yyyy")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubPeriod.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ClubPeriod.EndDate.ToString("dd/MM/yyyy")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ClubPeriod.Id">Edit</a> |
+    <a asp-page="./Index" asp-route-clubid="@Model.ClubPeriod.ClubId">Back to List</a>
+</div>

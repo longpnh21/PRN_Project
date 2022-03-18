@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using UniClub.Domain.Common.Enums
+@using UniClub.Domain.Entities
+@using UniClub.Razor.Utils
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,14 +20,46 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                    @{
+                        var user = SessionHelper.GetObjectFromJson<Person>(@Context.Session, "user");
+                        var roles = SessionHelper.GetObjectFromJson<List<string>>(@Context.Session, "roles");
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            </li>
+                            @if(user != null)
+                            {
+                                @if(roles.Any(r => r.Equals(Role.SystemAdministrator.ToString())))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Universities/Index">Universities</a>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                        @if(user == null)
+                        {
+                            <div class="form-inline my-2 my-lg-0">
+                              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><a asp-area="" asp-page="/Login">Login</a></button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown form-inline my-2 my-lg-0">
+                              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hello, @user.UserName
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-page="/Profile/Index">Profile</a>
+                                    <a class="dropdown-item" asp-page="/Logout">Logout</a>
+                              </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </nav>

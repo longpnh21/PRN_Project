@@ -15,6 +15,7 @@ namespace UniClub.Dtos.Update
         public string Name { get; set; }
         public bool? Gender { get; set; }
         public string Address { get; set; }
+        public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int? DepId { get; set; }
         public IFormFile UploadedImage { get; set; }

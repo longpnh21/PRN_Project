@@ -28,7 +28,7 @@ namespace UniClub.Commands.Update.Handlers
             var entity = await _eventRepository.GetByIdAsync(cancellationToken, new UpdateEventCommandSpecification(request));
             string imageUrl = null;
             if (request.UploadedImage != null && request.UploadedImage.Length > 0)
-{
+            {
                 imageUrl = await _uploadService.Upload(request.UploadedImage, "events");
             }
             request.ImageUrl = imageUrl;

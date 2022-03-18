@@ -9,6 +9,8 @@ namespace UniClub.Queries.GetById.Specifications
         public GetClubPeriodByIdQuerySpecification(GetClubPeriodByIdDto query) : base()
         {
             SetFilterCondition(e => !e.IsDeleted);
+
+            SetFilterCondition(e => e.Id == query.Id);
         }
     }
 }

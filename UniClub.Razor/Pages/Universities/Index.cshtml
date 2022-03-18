@@ -7,20 +7,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Universities</h1>
+<h1>User</h1>
 
 <p>
-    <a asp-page="Create">Add New University</a>
+    <a asp-page="Create">Add New User</a>
 </p>
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
             Search:
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
-            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<UniversityProperties>()">
-                <option value="">Sort by</option>
+            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<UniversityProperties>()">
             </select> |
-            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            Is Ascending <input asp-for="@Model.Dto.IsAscending"/> |
             <select asp-for="Dto.PageSize">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -28,6 +27,7 @@
                 <option value="50">50</option>
             </select> |
             <input type="submit" value="Search" class="btn btn-primary" /> |
+            <input asp-for="Dto.PageNumber" value="1" hidden/>
             <a asp-page="./Index">Back to full List</a>
         </p>
     </div>
@@ -36,7 +36,7 @@
     <thead>
         <tr>
             <th>
-                Logo
+                @Html.DisplayNameFor(model => model.Universities.Items[0].Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Universities.Items[0].UniName)
@@ -81,7 +81,7 @@
                 @Html.DisplayFor(modelItem => item.Slogan)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstablishedDate)
+                @item.EstablishedDate.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Website)
@@ -126,3 +126,4 @@
         <input type="submit" value="Next" class="btn btn-primary" @nextDisabled/>
     </form>
 </div>
+

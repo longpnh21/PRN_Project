@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniClub.Dtos.Response
 {
@@ -11,6 +12,8 @@ namespace UniClub.Dtos.Response
         public string ShortDescription { get; set; }
         public int UniId { get; set; }
         public string AvatarUrl { get; set; }
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
+
         public DateTime EstablishedDate { get; set; }
         public int MemberCount { get; set; }
         public string Slogan { get; set; }
