@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
 using UniClub.Dtos.GetWithPagination;
@@ -22,7 +23,8 @@ namespace UniClub.Razor.Pages.Departments
         public async Task<IActionResult> OnGetAsync()
         {
             var universities = await Mediator.Send(Dto);
-            ViewData["UniId"] = new SelectList(universities.Items, "Id", "UniName");
+            var universitiesAvailable = universities.Items.Where(uni => uni.IsDeleted == false).ToList();
+            ViewData["UniId"] = new SelectList(universitiesAvailable, "Id", "UniName");
             return Page();
         }
 

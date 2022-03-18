@@ -45,6 +45,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateClubTaskDto, ClubTask>();
             CreateMap<UpdateClubTaskDto, ClubTask>();
             CreateMap<DeleteClubTaskDto, ClubTask>();
+            CreateMap<ClubTaskDto, UpdateClubTaskDto>();
             #endregion
 
             #region DepartmentMapping
@@ -52,6 +53,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateDepartmentDto, Department>();
             CreateMap<UpdateDepartmentDto, Department>();
             CreateMap<DeleteDepartmentDto, Department>();
+            CreateMap<DepartmentDto, UpdateDepartmentDto>();
             #endregion
 
             #region EventMapping
@@ -59,6 +61,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateEventDto, Event>();
             CreateMap<UpdateEventDto, Event>();
             CreateMap<DeleteEventDto, Event>();
+            CreateMap<EventDto, UpdateEventDto>();
             #endregion
 
 
