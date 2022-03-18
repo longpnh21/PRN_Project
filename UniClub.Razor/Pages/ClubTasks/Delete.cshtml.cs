@@ -56,10 +56,9 @@ namespace UniClub.Razor.Pages.ClubTasks
 
             GetClubTaskByIdDto dto = new GetClubTaskByIdDto(id.Value);
             ClubTask = await Mediator.Send(dto);
-
             if (ClubTask != null)
             {
-                DeleteDepartmentDto delete = new DeleteDepartmentDto(id.Value);
+                DeleteClubTaskDto delete = new DeleteClubTaskDto(id.Value);
                 await Mediator.Send(delete);
             }
 
