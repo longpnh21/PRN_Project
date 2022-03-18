@@ -1,0 +1,48 @@
+﻿@page
+@model UniClub.Razor.Pages.ClubRoles.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add new Club Role</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClubRole.Role" class="control-label"></label>
+                <input asp-for="ClubRole.Role" class="form-control" />
+                <span asp-validation-for="ClubRole.Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubRole.ReportToRoleId" class="control-label"></label>
+                <input asp-for="ClubRole.ReportToRoleId" class="form-control" />
+                <span asp-validation-for="ClubRole.ReportToRoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubRole.ClubId" class="control-label"></label>
+                <input asp-for="ClubRole.ClubId" class="form-control" />
+                <span asp-validation-for="ClubRole.ClubId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubRole.ClubPeriodId" class="control-label"></label>
+                <input asp-for="ClubRole.ClubPeriodId" class="form-control" />
+                <span asp-validation-for="ClubRole.ClubPeriodId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

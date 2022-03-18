@@ -14,7 +14,12 @@ namespace UniClub.Commands.Update.Validators
 
             RuleFor(e => e.EndDate)
                 .NotNull().WithMessage("{PropertyName} is not null")
-                .Must(BeAFutureDate).WithMessage("{PropertyName} is invalid");
+                .Must(BeAFutureDate).WithMessage("{PropertyName} is invalid")
+                .GreaterThan(e => e.StartDate).WithMessage("{PropertyName} must be greater than start date");
+
+            RuleFor(e => e.MaxParticipants)
+                .NotNull().WithMessage("{PropertyName} is invalid")
+                .GreaterThan(0).WithMessage("{PropertyName} is invalid");
 
             RuleFor(e => e.Status)
                 .IsInEnum();

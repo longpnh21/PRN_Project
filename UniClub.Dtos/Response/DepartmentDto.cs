@@ -7,6 +7,5 @@
         public string DepName { get; set; }
         public string ShortName { get; set; }
         public bool IsDeleted { get; set; }
-
     }
 }

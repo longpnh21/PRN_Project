@@ -1,0 +1,42 @@
+﻿@page
+@model UniClub.Razor.Pages.Departments.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add new Departments</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Department.UniId" class="control-label">University Name</label>
+                <select asp-for="Department.UniId" class="form-control" asp-items="ViewBag.UniId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department.DepName" class="control-label"></label>
+                <input asp-for="Department.DepName" class="form-control" />
+                <span asp-validation-for="Department.DepName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department.ShortName" class="control-label"></label>
+                <input asp-for="Department.ShortName" class="form-control" />
+                <span asp-validation-for="Department.ShortName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

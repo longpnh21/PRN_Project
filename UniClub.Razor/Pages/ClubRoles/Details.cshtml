@@ -1,0 +1,37 @@
+﻿@page
+@model UniClub.Razor.Pages.ClubRoles.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Club Role</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubRole.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClubRole.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClubRole.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClubRole.Role)
+        </dd>
+        <dt class="col-sm-2">
+            Report to Role
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportToClubRole.Role)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ClubRole.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

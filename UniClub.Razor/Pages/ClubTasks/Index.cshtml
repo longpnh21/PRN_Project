@@ -1,0 +1,116 @@
+﻿@page
+@using UniClub.Domain.Common.Enums.Properties
+@using UniClub.Dtos.GetWithPagination
+@model UniClub.Razor.Pages.ClubTasks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Club Tasks</h1>
+
+<p>
+    <a asp-page="Create">Add New Club Task</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Search:
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<DepartmentProperties>()">
+                <option value="">Sort by</option>
+            </select> |
+            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            <select asp-for="Dto.PageSize">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select> |
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].EventId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].Description)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubTasks.Items[0].EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ClubTasks.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.ClubTasks.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.ClubTasks.HasNextPage ? "disabled" : "";
+}
+
+<div>
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber -1)" />
+        </div>
+        <input type="submit" value="Previous" class="btn btn-primary" @prevDisabled/>
+    </form>
+
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" />
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber + 1)"/>
+        </div>
+        <input type="submit" value="Next" class="btn btn-primary" @nextDisabled/>
+    </form>
+</div>
