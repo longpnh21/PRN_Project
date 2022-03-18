@@ -1,0 +1,68 @@
+﻿@page
+@model UniClub.Razor.Pages.Universities.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add new University</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="University.UniName" class="control-label"></label>
+                <input asp-for="University.UniName" class="form-control" />
+                <span asp-validation-for="University.UniName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.UniAddress" class="control-label"></label>
+                <input asp-for="University.UniAddress" class="form-control" />
+                <span asp-validation-for="University.UniAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.UniPhone" class="control-label"></label>
+                <input asp-for="University.UniPhone" class="form-control" />
+                <span asp-validation-for="University.UniPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.UploadedLogo" class="control-label"></label>
+                <input type="file" asp-for="University.UploadedLogo" class="form-control" />
+                <span asp-validation-for="University.UploadedLogo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.Slogan" class="control-label"></label>
+                <input asp-for="University.Slogan" class="form-control" />
+                <span asp-validation-for="University.Slogan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.EstablishedDate" class="control-label"></label>
+                <input type="date" asp-for="University.EstablishedDate" class="form-control" />
+                <span asp-validation-for="University.EstablishedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.Website" class="control-label"></label>
+                <input asp-for="University.Website" class="form-control" />
+                <span asp-validation-for="University.Website" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="University.ShortName" class="control-label"></label>
+                <input asp-for="University.ShortName" class="form-control" />
+                <span asp-validation-for="University.ShortName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

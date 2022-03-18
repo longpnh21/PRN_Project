@@ -1,0 +1,128 @@
+﻿@page
+@using UniClub.Domain.Common.Enums.Properties
+@using UniClub.Dtos.GetWithPagination
+@model UniClub.Razor.Pages.Universities.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Universities</h1>
+
+<p>
+    <a asp-page="Create">Add New University</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Search:
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<UniversityProperties>()">
+                <option value="">Sort by</option>
+            </select> |
+            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            <select asp-for="Dto.PageSize">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select> |
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].UniName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].UniAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].UniPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].Slogan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].EstablishedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].Website)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities.Items[0].ShortName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Universities.Items) {
+        <tr>
+            <td>
+                <img src="@item.LogoUrl" class="img-fluid" alt="University Logo">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slogan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstablishedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Website)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Universities.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Universities.HasNextPage ? "disabled" : "";
+}
+
+<div>
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber -1)" />
+        </div>
+        <input type="submit" value="Previous" class="btn btn-primary" @prevDisabled/>
+    </form>
+
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" />
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber + 1)"/>
+        </div>
+        <input type="submit" value="Next" class="btn btn-primary" @nextDisabled/>
+    </form>
+</div>

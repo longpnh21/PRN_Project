@@ -1,0 +1,66 @@
+﻿@page
+@model UniClub.Razor.Pages.Clubs.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add new club</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Club.ClubName" class="control-label"></label>
+                <input asp-for="Club.ClubName" class="form-control" />
+                <span asp-validation-for="Club.ClubName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.ShortName" class="control-label"></label>
+                <input asp-for="Club.ShortName" class="form-control" />
+                <span asp-validation-for="Club.ShortName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.Description" class="control-label"></label>
+                <input asp-for="Club.Description" class="form-control" />
+                <span asp-validation-for="Club.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.ShortDescription" class="control-label"></label>
+                <input asp-for="Club.ShortDescription" class="form-control" />
+                <span asp-validation-for="Club.ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.UploadedAvatar" class="control-label"></label>
+                <input type="file" asp-for="Club.UploadedAvatar" class="form-control" />
+                <span asp-validation-for="Club.UploadedAvatar" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <input asp-for="Club.UniId" value="@Model.UniId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.EstablishedDate" class="control-label"></label>
+                <input type="date" asp-for="Club.EstablishedDate" class="form-control" />
+                <span asp-validation-for="Club.EstablishedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.Slogan" class="control-label"></label>
+                <input asp-for="Club.Slogan" class="form-control" />
+                <span asp-validation-for="Club.Slogan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index" asp-route-uniId="@Model.UniId">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
