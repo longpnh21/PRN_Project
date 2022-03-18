@@ -23,8 +23,7 @@ namespace UniClub.Razor.Pages.Departments
         public async Task<IActionResult> OnGetAsync()
         {
             var universities = await Mediator.Send(Dto);
-            var universitiesAvailable = universities.Items.Where(uni => uni.IsDeleted == false).ToList();
-            ViewData["UniId"] = new SelectList(universitiesAvailable, "Id", "UniName");
+            ViewData["UniId"] = new SelectList(universities.Items, "Id", "UniName");
             return Page();
         }
 

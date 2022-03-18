@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Response;
-using System.Linq;
 
-namespace UniClub.Razor.Pages.ClubTasks
+namespace UniClub.Razor.Pages.ClubRoles
 {
     public class CreateModel : PageModel
     {
@@ -18,17 +18,15 @@ namespace UniClub.Razor.Pages.ClubTasks
         protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
         [BindProperty(SupportsGet = true)]
-        public GetEventsWithPaginationDto Dto { get; set; }
+        public GetClubRolesWithPaginationDto Dto { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
-            var events = await Mediator.Send(Dto);
-            ViewData["EventId"] = new SelectList(events.Items, "Id", "EventName");
             return Page();
         }
 
         [BindProperty]
-        public CreateClubTaskDto ClubTask { get; set; }
+        public CreateClubRoleDto ClubRole { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -37,7 +35,7 @@ namespace UniClub.Razor.Pages.ClubTasks
                 return Page();
             }
 
-            await Mediator.Send(ClubTask);
+            await Mediator.Send(ClubRole);
 
             return RedirectToPage("./Index");
         }

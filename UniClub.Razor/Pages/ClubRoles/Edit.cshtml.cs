@@ -11,7 +11,7 @@ using UniClub.Dtos.GetById;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Update;
 
-namespace UniClub.Razor.Pages.ClubTasks
+namespace UniClub.Razor.Pages.ClubRoles
 {
     public class EditModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace UniClub.Razor.Pages.ClubTasks
         private readonly IMapper _mapper;
 
         [BindProperty(SupportsGet = true)]
-        public GetEventsWithPaginationDto Dto { get; set; }
+        public GetClubRolesWithPaginationDto ClubRoleDto { get; set; }
 
         protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
         public EditModel(IMapper mapper)
@@ -32,22 +32,22 @@ namespace UniClub.Razor.Pages.ClubTasks
             {
                 return NotFound();
             }
-            GetClubTaskByIdDto dto = new GetClubTaskByIdDto(id.Value);
-            ClubTask = _mapper.Map<UpdateClubTaskDto>(await Mediator.Send(dto));
+            GetClubRoleByIdDto dto = new GetClubRoleByIdDto(id.Value);
+            ClubRole = _mapper.Map<UpdateClubRoleDto>(await Mediator.Send(dto));
 
-            if (ClubTask == null)
+            if (ClubRole == null)
             {
                 return NotFound();
             }
 
-            var events = await Mediator.Send(Dto);
-            ViewData["EventId"] = new SelectList(events.Items, "Id", "EventName");
+            var reportClubRoles = await Mediator.Send(ClubRoleDto);
+            ViewData["ReportClubRoleId"] = new SelectList(reportClubRoles.Items, "Id", "Role");
 
             return Page();
         }
 
         [BindProperty]
-        public UpdateClubTaskDto ClubTask { get; set; }
+        public UpdateClubRoleDto ClubRole { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -55,7 +55,7 @@ namespace UniClub.Razor.Pages.ClubTasks
                 return Page();
             }
 
-            await Mediator.Send(ClubTask);
+            await Mediator.Send(ClubRole);
 
             return RedirectToPage("./Index");
         }

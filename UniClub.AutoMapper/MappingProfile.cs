@@ -38,6 +38,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateClubRoleDto, ClubRole>();
             CreateMap<UpdateClubRoleDto, ClubRole>();
             CreateMap<DeleteClubRoleDto, ClubRole>();
+            CreateMap<ClubRoleDto, UpdateClubRoleDto>();
             #endregion
 
             #region ClubTaskMapping
