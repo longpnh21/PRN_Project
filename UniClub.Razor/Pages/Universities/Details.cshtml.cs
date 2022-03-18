@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
-using UniClub.Dtos.Update;
 
 namespace UniClub.Razor.Pages.Universities
 {
@@ -24,7 +23,7 @@ namespace UniClub.Razor.Pages.Universities
         public UniversityDto University { get; set; }
         public async Task<IActionResult> OnGet(int? id)
         {
-            if (id == null)
+            if (id == null || id < 1)
             {
                 return NotFound();
             }
@@ -36,7 +35,5 @@ namespace UniClub.Razor.Pages.Universities
             }
             return Page();
         }
-
-        
     }
 }

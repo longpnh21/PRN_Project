@@ -27,7 +27,7 @@ namespace UniClub.Commands.Create.Handlers
         {
             string avatarUrl = DEFAULT_AVATAR;
             if (request.UploadedAvatar != null && request.UploadedAvatar.Length > 0)
-{
+            {
                 avatarUrl = await _uploadService.Upload(request.UploadedAvatar, "clubs");
             }
             request.AvatarUrl = avatarUrl;

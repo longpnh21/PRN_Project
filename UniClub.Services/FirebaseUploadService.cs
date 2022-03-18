@@ -11,7 +11,7 @@ namespace UniClub.Services
 {
     public class FirebaseUploadService : IUploadService
     {
-        
+
         private static string API_KEY = "AIzaSyB3r14X6dC4QYGvrYN7hVrLgNZNliK9ruQ";
         private static string BUCKET = "premium-client-337312.appspot.com";
         private static string AUTH_EMAIL = "administrator@uniclub.com";
@@ -23,7 +23,7 @@ namespace UniClub.Services
             {
                 using (var stream = file.OpenReadStream())
                 {
-                    
+
                     var auth = new FirebaseAuthProvider(new FirebaseConfig(API_KEY));
                     var signIn = await auth.SignInWithEmailAndPasswordAsync(AUTH_EMAIL, AUTH_PASSWORD);
 

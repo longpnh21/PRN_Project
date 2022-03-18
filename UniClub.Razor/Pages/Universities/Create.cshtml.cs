@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
 
@@ -19,16 +20,26 @@ namespace UniClub.Razor.Pages.Universities
 
         [BindProperty]
         public CreateUniversityDto University { get; set; }
+        public string Message { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                await Mediator.Send(University);
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+                Message.Replace("--", "--\n");
                 return Page();
             }
-
-            await Mediator.Send(University);
-
-            return RedirectToPage("./Index");
         }
     }
 }

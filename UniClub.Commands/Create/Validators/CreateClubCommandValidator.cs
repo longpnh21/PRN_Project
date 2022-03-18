@@ -20,18 +20,15 @@ namespace UniClub.Commands.Create.Validators
 
             RuleFor(e => e.Description)
                 .NotEmpty().WithMessage("{PropertyName} is not empty")
-                .Length(2, 400).WithMessage("Length {PropertyName} must between 2 and 400")
-                .Must(BeAValidName).WithMessage("{PropertyName} contains invalid characters");
+                .Length(2, 400).WithMessage("Length {PropertyName} must between 2 and 400");
 
             RuleFor(e => e.ShortDescription)
                 .NotEmpty().WithMessage("{PropertyName} is not empty")
-                .Length(2, 100).WithMessage("Length {PropertyName} must between 2 and 100")
-                .Must(BeAValidName).WithMessage("{PropertyName} contains invalid characters");
+                .Length(2, 100).WithMessage("Length {PropertyName} must between 2 and 100");
 
             RuleFor(e => e.Slogan)
                 .NotEmpty().WithMessage("{PropertyName} is not empty")
-                .Length(2, 256).WithMessage("Length {PropertyName} must between 2 and 256")
-                .Must(BeAValidName).WithMessage("{PropertyName} contains invalid characters");
+                .Length(2, 256).WithMessage("Length {PropertyName} must between 2 and 256");
 
             RuleFor(e => e.UniId)
                 .NotEmpty().WithMessage("{PropertyName} is not empty")

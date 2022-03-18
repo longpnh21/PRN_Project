@@ -24,6 +24,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateClubDto, Club>();
             CreateMap<UpdateClubDto, Club>();
             CreateMap<DeleteClubDto, Club>();
+            CreateMap<ClubDto, UpdateClubDto>();
             #endregion
 
             #region ClubPeriodMapping
@@ -31,6 +32,7 @@ namespace UniClub.AutoMapper
             CreateMap<CreateClubPeriodDto, ClubPeriod>();
             CreateMap<UpdateClubPeriodDto, ClubPeriod>();
             CreateMap<DeleteClubPeriodDto, ClubPeriod>();
+            CreateMap<ClubPeriodDto, UpdateClubPeriodDto>();
             #endregion
 
             #region ClubRoleMapping
@@ -83,8 +85,9 @@ namespace UniClub.AutoMapper
             #region Student
             CreateMap<Person, UserDto>()
                 .ForMember(dto => dto.DepName, opt => opt.MapFrom(e => e.Dep.DepName));
-            CreateMap<CreateUserDto, Person>().ForSourceMember(x => x.Password, opt => opt.DoNotValidate());
+            CreateMap<CreateUserDto, Person>();
             CreateMap<UpdateUserDto, Person>();
+            CreateMap<UserDto, UpdateUserDto>();
             #endregion
 
             #region ClubMembers
@@ -96,6 +99,8 @@ namespace UniClub.AutoMapper
             CreateMap<UpdateClubMemberDto, MemberRole>();
             CreateMap<DeleteClubMemberDto, MemberRole>();
             #endregion
+
+
         }
     }
 }

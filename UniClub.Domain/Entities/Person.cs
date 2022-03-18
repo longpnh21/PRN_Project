@@ -38,7 +38,6 @@ namespace UniClub.Domain.Entities
         public bool IsDeleted { get; set; }
         [NotMapped]
         public bool IsHardDeleted { get; set; }
-
         public virtual Department Dep { get; set; }
         public virtual ICollection<MemberRole> MemberRoles { get; set; }
         public virtual ICollection<Participant> Participants { get; set; }

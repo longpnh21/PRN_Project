@@ -26,17 +26,10 @@ namespace UniClub.Commands.Update.Handlers
         }
         public async Task<Result> Handle(UpdateUserDto request, CancellationToken cancellationToken)
         {
-            string imageUrl = null;
+            string imageUrl = string.Empty;
             if (request.UploadedImage != null && request.UploadedImage.Length > 0)
             {
                 imageUrl = await _uploadService.Upload(request.UploadedImage, "users");
-                if (string.IsNullOrEmpty(imageUrl))
-                {
-                    if (request.Gender.Value)
-                    {
-                        imageUrl = DEFAULT_MALE_IMAGE;
-                    }
-                }
             }
             request.ImageUrl = imageUrl;
             return await _identityService.UpdateUserAsync(request.Id, _mapper.Map<Person>(request));

@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 
 namespace UniClub.Dtos.Create
 {

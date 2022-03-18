@@ -4,7 +4,6 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
@@ -58,10 +57,10 @@ namespace UniClub.HttpApi
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IJwtUtils, JwtUtils>();
             services.AddHttpContextAccessor();
-            
+
             string rootPath;
             if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("HOME")))
-                
+
                 rootPath = Path.Combine(System.Environment.GetEnvironmentVariable("HOME"), "site", "wwwroot");
             else
                 rootPath = ".";

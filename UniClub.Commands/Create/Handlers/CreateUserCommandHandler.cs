@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using System.Threading;
 using System.Threading.Tasks;
 using UniClub.Application.Interfaces;
@@ -27,16 +26,20 @@ namespace UniClub.Commands.Create.Handlers
         }
         public async Task<string> Handle(CreateUserDto request, CancellationToken cancellationToken)
         {
-            string imageUrl = DEFAULT_FEMALE_IMAGE;
+            string imageUrl = string.Empty;
             if (request.UploadedImage != null && request.UploadedImage.Length > 0)
             {
                 imageUrl = await _uploadService.Upload(request.UploadedImage, "users");
-                if (string.IsNullOrEmpty(imageUrl))
+            }
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                if (request.Gender.Value)
                 {
-                    if (request.Gender.Value)
-                    {
-                        imageUrl = DEFAULT_MALE_IMAGE;
-                    }
+                    imageUrl = DEFAULT_MALE_IMAGE;
+                }
+                else
+                {
+                    imageUrl = DEFAULT_FEMALE_IMAGE;
                 }
             }
             request.ImageUrl = imageUrl;

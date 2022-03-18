@@ -21,27 +21,11 @@ namespace UniClub.Razor.Pages.Clubs
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (Dto.UniId == 0)
+            if (Dto.UniId < 1)
             {
                 return NotFound();
             }
-            var x = HttpContext.Request.Query["btnSubmit"].ToString();
-            switch (x)
-            {
-                case "Next":
-                    Dto.PageNumber++;
-                    break;
-                case "Previous":
-                    if (Dto.PageNumber > 1)
-                    {
-                        Dto.PageNumber--;
-                        break;
-                    }
-                    Dto.PageNumber = 1;
-                    break;
-                default:
-                    break;
-            }
+
             var university = await Mediator.Send(new GetUniversityByIdDto(Dto.UniId));
             if (university == null)
             {

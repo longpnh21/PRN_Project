@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using UniClub.Domain.Common.Enums;
 using UniClub.Domain.Entities;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
@@ -25,16 +24,7 @@ namespace UniClub.Queries.GetById.Handlers
         }
         public async Task<UserDto> Handle(GetUserByIdDto request, CancellationToken cancellationToken)
         {
-            Person user;
-            switch (request.GetRole())
-            {
-                case Role.Student:
-                    user = await SpecificationEvaluator<Person>.GetQuery(_userManager.Users, new GetStudentByIdQuerySpecification(request)).FirstOrDefaultAsync();
-                    break;
-                default:
-                    user = null;
-                    break;
-            }
+            Person user = await SpecificationEvaluator<Person>.GetQuery(_userManager.Users, new GetStudentByIdQuerySpecification(request)).FirstOrDefaultAsync();
             return _mapper.Map<UserDto>(user);
         }
     }
