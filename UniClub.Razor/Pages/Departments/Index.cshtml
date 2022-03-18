@@ -1,0 +1,105 @@
+﻿@page
+@using UniClub.Domain.Common.Enums.Properties
+@using UniClub.Dtos.GetWithPagination
+@model UniClub.Razor.Pages.Departments.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Departments</h1>
+
+<p>
+    <a asp-page="Create">Add New Department</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Search:
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<DepartmentProperties>()">
+                <option value="">Sort by</option>
+            </select> |
+            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            <select asp-for="Dto.PageSize">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select> |
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<p>@Model.Departments.Items.Count</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments.Items[0].UniId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments.Items[0].DepName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments.Items[0].ShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments.Items[0].IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Departments.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Departments.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Departments.HasNextPage ? "disabled" : "";
+}
+
+<div>
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber -1)" />
+        </div>
+        <input type="submit" value="Previous" class="btn btn-primary" @prevDisabled/>
+    </form>
+
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.SearchValue" />
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber + 1)"/>
+        </div>
+        <input type="submit" value="Next" class="btn btn-primary" @nextDisabled/>
+    </form>
+</div>
