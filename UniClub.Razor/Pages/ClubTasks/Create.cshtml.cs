@@ -9,6 +9,7 @@ using UniClub.Dtos.Create;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Response;
 using System.Linq;
+using System;
 
 namespace UniClub.Razor.Pages.ClubTasks
 {
@@ -16,7 +17,7 @@ namespace UniClub.Razor.Pages.ClubTasks
     {
         private ISender _mediator;
         protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
-
+        public string Message { get; set; }
         [BindProperty(SupportsGet = true)]
         public GetEventsWithPaginationDto Dto { get; set; }
 
@@ -32,14 +33,28 @@ namespace UniClub.Razor.Pages.ClubTasks
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                if (Dto.StartDate > Dto.EndDate)
+                {
+                    throw new Exception("StartDate must be before EndDate");
+                }
+
+                await Mediator.Send(ClubTask);
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+                Message.Replace("--", "--\n");
                 return Page();
             }
-
-            await Mediator.Send(ClubTask);
-
-            return RedirectToPage("./Index");
         }
     }
 }

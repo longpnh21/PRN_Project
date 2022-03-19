@@ -8,13 +8,9 @@ namespace UniClub.Dtos.GetWithPagination
 {
     public class GetClubMembersWithPaginationDto : RequestPaginationQuery<MemberRoleProperties?>, IRequest<PaginatedList<MemberRoleDto>>
     {
-        //[Required]
-        private int _clubPeriodId;
+        public int ClubPeriodId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public override MemberRoleProperties? OrderBy { get; set; }
-
-        public int GetClubPeriodId() => _clubPeriodId;
-        public void SetClubPeriodId(int clubPeriodId) => _clubPeriodId = clubPeriodId;
     }
 }

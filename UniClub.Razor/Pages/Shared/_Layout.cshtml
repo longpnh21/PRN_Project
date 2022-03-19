@@ -38,6 +38,18 @@
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Universities/Index">Universities</a>
                                     </li>
                                 }
+                                else if(roles.Any(r => r.Contains(Role.SchoolAdmin.ToString())))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Departments/Index">Departments</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Students/Index">Students</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Clubs/Index">Clubs</a>
+                                    </li>
+                                }
                             }
 
                         </ul>

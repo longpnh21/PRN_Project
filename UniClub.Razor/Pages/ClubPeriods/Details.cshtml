@@ -45,5 +45,6 @@
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.ClubPeriod.Id">Edit</a> |
+    <a asp-page="/MemberRoles/Index" asp-route-clubPeriodId="@Model.ClubPeriod.Id">Members</a> |
     <a asp-page="./Index" asp-route-clubid="@Model.ClubPeriod.ClubId">Back to List</a>
 </div>

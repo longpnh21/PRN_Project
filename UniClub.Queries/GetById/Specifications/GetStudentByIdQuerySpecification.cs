@@ -9,6 +9,7 @@ namespace UniClub.Queries.GetById.Specifications
         public GetStudentByIdQuerySpecification(GetUserByIdDto dto)
         {
             SetFilterCondition(e => !e.IsDeleted);
+            SetFilterCondition(e => e.Id == dto.Id);
             AddInclude(e => e.Dep);
         }
     }

@@ -5,6 +5,7 @@
         Anonymous,
         SystemAdministrator,
         SchoolAdmin,
-        Student
+        Student,
+        ClubAdmin
     }
 }

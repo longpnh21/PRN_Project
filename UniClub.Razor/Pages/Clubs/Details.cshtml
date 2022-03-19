@@ -70,5 +70,7 @@
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Club.Id">Edit</a> |
+    <a asp-page="/ClubPeriods/Index" asp-route-clubid="@Model.Club.Id">ClubPeriods</a> |
+    <a asp-page="/Events/Index">Event</a>
     <a asp-page="./Index" asp-route-uniid="@Model.Club.UniId">Back to List</a>
 </div>

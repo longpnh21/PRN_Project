@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using UniClub.Domain.Common;
+using UniClub.Domain.Common.Enums;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Users
 {
+    [AuthorizationFilter(Roles = "SystemAdministrator")]
     public class IndexModel : PageModel
     {
         private ISender _mediator;
@@ -20,6 +23,7 @@ namespace UniClub.Razor.Pages.Users
 
         public async Task OnGetAsync()
         {
+            Dto.SetRole(Role.Anonymous);
             Users = await Mediator.Send(Dto);
         }
     }

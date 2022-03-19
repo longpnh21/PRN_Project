@@ -1,0 +1,125 @@
+﻿@page
+@using UniClub.Domain.Common.Enums.Properties
+@using UniClub.Dtos.GetWithPagination
+@model UniClub.Razor.Pages.MemberRoles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Club Member</h1>
+
+<p>
+    <a asp-page="Create" asp-route-clubPeriodId="@Model.Dto.ClubPeriodId">Add New Member</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input hidden="hidden" asp-route-clubPeriodId="@Model.Dto.ClubPeriodId" />
+            Search:
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<MemberRoleProperties>()">
+            </select> |
+            Is Ascending <input asp-for="@Model.Dto.IsAscending"/> |
+            <select asp-for="Dto.PageSize">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select> |
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <input asp-for="Dto.PageNumber" value="1" hidden/>
+            <a asp-page="./Index" asp-route-clubPeriodId="@Model.Dto.ClubPeriodId">Back to full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].StudentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].ClubPeriodId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberRoles.Items[0].EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MemberRoles.Items) {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.StudentId)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.ClubPeriodId)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Role)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Status)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.StartDate)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.EndDate)
+            </th>
+            <td>
+                <a asp-page="./Edit" asp-route-studentId="@item.StudentId" asp-route-clubPeriodId="@item.ClubPeriodId">Edit</a> |
+                <a asp-page="./Details" asp-route-studentId="@item.StudentId" asp-route-clubPeriodId="@item.ClubPeriodId">Details</a> |
+                <a asp-page="./Delete"asp-route-studentId="@item.StudentId" asp-route-clubPeriodId="@item.ClubPeriodId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.MemberRoles.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.MemberRoles.HasNextPage ? "disabled" : "";
+}
+
+<div>
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.ClubPeriodId" />
+            <input type="text" asp-for="@Model.Dto.SearchValue" /> |
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber -1)" />
+        </div>
+        <input type="submit" value="Previous" class="btn btn-primary" @prevDisabled/>
+    </form>
+
+    <form asp-page="./Index" method="get">
+        <div hidden>
+            <input type="text" asp-for="@Model.Dto.ClubPeriodId" />
+            <input type="text" asp-for="@Model.Dto.SearchValue" />
+            <input asp-for="@Model.Dto.OrderBy" /> 
+            <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
+            <input asp-for="@Model.Dto.PageSize" />
+            <input asp-for="@Model.Dto.PageNumber" value="@(Model.Dto.PageNumber + 1)"/>
+        </div>
+        <input type="submit" value="Next" class="btn btn-primary" @nextDisabled/>
+    </form>
+</div>

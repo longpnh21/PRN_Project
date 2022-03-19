@@ -8,9 +8,11 @@ using UniClub.Dtos.Delete;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
 using UniClub.Dtos.Update;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Events
 {
+    [AuthorizationFilter(Roles = "ClubAdmin")]
     public class DeleteModel : PageModel
     {
         private ISender _mediator;

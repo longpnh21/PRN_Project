@@ -31,7 +31,7 @@ namespace UniClub.Queries.GetWithPagination.Specifications
                 SetFilterCondition(e => e.UniId.Equals(query.UniId));
             }
 
-            AddInclude("ClubPeriods.MemberRoles");
+            AddInclude("ClubPeriods");
 
             if ((query.OrderBy != null))
             {

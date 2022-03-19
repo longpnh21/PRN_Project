@@ -10,9 +10,9 @@
 <h1>Club Tasks</h1>
 
 <p>
-    <a asp-page="Create">Add New Club Task</a>
+    <a asp-page="Create" asp-route-eventId=@Model.Dto.EventId>Add New Club Task</a>
 </p>
-<form asp-page="./Index" method="get">
+<form asp-page="./Index"  asp-route-eventId=@Model.Dto.EventId method="get">
     <div class="form-actions no-color">
         <p>
             Search:
@@ -92,7 +92,7 @@
 }
 
 <div>
-    <form asp-page="./Index" method="get">
+    <form asp-page="./Index"  asp-route-eventId=@Model.Dto.EventId method="get">
         <div hidden>
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
             <input asp-for="@Model.Dto.OrderBy" /> 
@@ -103,7 +103,7 @@
         <input type="submit" value="Previous" class="btn btn-primary" @prevDisabled/>
     </form>
 
-    <form asp-page="./Index" method="get">
+    <form asp-page="./Index" asp-route-eventId=@Model.Dto.EventId method="get">
         <div hidden>
             <input type="text" asp-for="@Model.Dto.SearchValue" />
             <input asp-for="@Model.Dto.OrderBy" /> 

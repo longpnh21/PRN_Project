@@ -12,7 +12,7 @@
 <p>
     <a asp-page="Create" asp-route-clubid="@Model.Dto.ClubId">Add New ClubPeriod</a>
 </p>
-<form asp-page="./Index" method="get">
+<form asp-page="./Index" asp-route-clubId="@Model.Dto.ClubId" method="get">
     <div class="form-actions no-color">
         <p>
             Search:

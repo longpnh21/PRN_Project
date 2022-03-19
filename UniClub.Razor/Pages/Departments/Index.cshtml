@@ -17,10 +17,9 @@
         <p>
             Search:
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
-            <select asp-for="Dto.OrderBy" asp-items="Html.GetEnumSelectList<DepartmentProperties>()">
-                <option value="">Sort by</option>
+            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<DepartmentProperties>()">
             </select> |
-            Is Ascending <input type="checkbox" asp-for="@Model.Dto.IsAscending" name="IsAscending"/> |
+            Is Ascending <input asp-for="@Model.Dto.IsAscending"/> |
             <select asp-for="Dto.PageSize">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -28,6 +27,7 @@
                 <option value="50">50</option>
             </select> |
             <input type="submit" value="Search" class="btn btn-primary" /> |
+            <input asp-for="Dto.PageNumber" value="1" hidden/>
             <a asp-page="./Index">Back to full List</a>
         </p>
     </div>

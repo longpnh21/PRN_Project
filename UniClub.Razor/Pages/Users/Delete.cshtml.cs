@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using UniClub.Dtos.Delete;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Users
 {
+    [AuthorizationFilter(Roles = "SystemAdministrator")]
     public class DeleteModel : PageModel
     {
         private ISender _mediator;

@@ -9,9 +9,11 @@ using UniClub.Domain.Common.Interfaces;
 using UniClub.Domain.Entities;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.ClubTasks
 {
+    [AuthorizationFilter(Roles = "ClubAdmin")]
     public class IndexModel : PageModel
     {
         private ISender _mediator;

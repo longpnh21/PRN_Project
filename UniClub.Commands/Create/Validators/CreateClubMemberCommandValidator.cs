@@ -13,8 +13,7 @@ namespace UniClub.Commands.Create.Validators
                 .Length(2, 256).WithMessage("Length {PropertyName} must between 2 and 256");
 
             RuleFor(e => e.ClubRoleId)
-                .NotEmpty().WithMessage("{PropertyName} is not empty")
-                .GreaterThan(0).WithMessage("{PropertyName} is invalid");
+                .IsInEnum();
 
             RuleFor(e => e.Status)
                 .NotEmpty().WithMessage("{PropertyName} is not empty")

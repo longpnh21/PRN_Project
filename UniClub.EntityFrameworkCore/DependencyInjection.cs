@@ -42,7 +42,6 @@ namespace UniClub.EntityFrameworkCore
             services.AddTransient<IUniversityRepository, UniversityRepository>();
             services.AddTransient<IClubRepository, ClubRepository>();
             services.AddTransient<IClubPeriodRepository, ClubPeriodRepository>();
-            services.AddTransient<IClubRoleRepository, ClubRoleRepository>();
             services.AddTransient<IClubTaskRepository, ClubTaskRepository>();
             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient<IEventRepository, EventRepository>();

@@ -35,14 +35,6 @@ namespace UniClub.AutoMapper
             CreateMap<ClubPeriodDto, UpdateClubPeriodDto>();
             #endregion
 
-            #region ClubRoleMapping
-            CreateMap<ClubRole, ClubRoleDto>().ReverseMap();
-            CreateMap<CreateClubRoleDto, ClubRole>();
-            CreateMap<UpdateClubRoleDto, ClubRole>();
-            CreateMap<DeleteClubRoleDto, ClubRole>();
-            CreateMap<ClubRoleDto, UpdateClubRoleDto>();
-            #endregion
-
             #region ClubTaskMapping
             CreateMap<ClubTask, ClubTaskDto>().ReverseMap();
             CreateMap<CreateClubTaskDto, ClubTask>();
@@ -93,8 +85,7 @@ namespace UniClub.AutoMapper
             #region ClubMembers
             CreateMap<MemberRole, MemberRoleDto>()
                 .ForMember(dto => dto.StudentId, opt => opt.MapFrom(e => e.MemberId))
-                .ForMember(dto => dto.Name, opt => opt.MapFrom(e => e.Member.Name))
-                .ForMember(dto => dto.Role, opt => opt.MapFrom(e => e.ClubRole.Role));
+                .ForMember(dto => dto.Name, opt => opt.MapFrom(e => e.Member.Name));
             CreateMap<CreateClubMemberDto, MemberRole>();
             CreateMap<UpdateClubMemberDto, MemberRole>();
             CreateMap<DeleteClubMemberDto, MemberRole>();

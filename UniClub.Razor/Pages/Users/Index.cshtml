@@ -1,6 +1,8 @@
 ﻿@page
 @using UniClub.Domain.Common.Enums.Properties
+@using UniClub.Domain.Entities
 @using UniClub.Dtos.GetWithPagination
+@using UniClub.Razor.Utils
 @model UniClub.Razor.Pages.Users.IndexModel
 
 @{
@@ -17,7 +19,7 @@
         <p>
             Search:
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
-            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<UniversityProperties>()">
+            <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<PersonProperties>()">
             </select> |
             Is Ascending <input asp-for="@Model.Dto.IsAscending"/> |
             <select asp-for="Dto.PageSize">
@@ -63,6 +65,9 @@
 @foreach (var item in Model.Users.Items) {
         <tr>
             <td>
+                <img src="@item.ImageUrl" class="img-fluid" alt="User Image">
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
@@ -93,11 +98,17 @@
             <td>
                 @item.DateOfBirth.ToString("dd/MM/yyyy")
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                @{
+                    var user = SessionHelper.GetObjectFromJson<Person>(HttpContext.Session, "user");
+                    if(user.Id != item.Id)
+                    {
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
+            }
         </tr>
 }
     </tbody>

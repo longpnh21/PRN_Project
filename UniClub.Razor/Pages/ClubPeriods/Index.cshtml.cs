@@ -7,9 +7,11 @@ using UniClub.Domain.Common;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.ClubPeriods
 {
+    [AuthorizationFilter(Roles = "SchoolAdmin")]
     public class IndexModel : PageModel
     {
         private ISender _mediator;

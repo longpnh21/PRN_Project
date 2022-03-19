@@ -12,8 +12,6 @@ namespace UniClub.EntityFrameworkCore.Configurations
 
             entity.ToTable("MemberRole");
 
-            entity.HasIndex(e => e.ClubRoleId, "IX_MemberRole_ClubRoleId");
-
             entity.Property(e => e.MemberId).HasMaxLength(300);
 
             entity.Property(e => e.EndDate).HasColumnType("datetime");
@@ -26,12 +24,6 @@ namespace UniClub.EntityFrameworkCore.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_MemberRole_ClubPeriod");
 
-            entity.HasOne(d => d.ClubRole)
-                .WithMany(p => p.MemberRoles)
-                .HasForeignKey(d => d.ClubRoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_MemberRole_ClubRole");
-
             entity.HasOne(d => d.Member)
                 .WithMany(p => p.MemberRoles)
                 .HasForeignKey(d => d.MemberId)
@@ -39,4 +31,5 @@ namespace UniClub.EntityFrameworkCore.Configurations
                 .HasConstraintName("FK_MemberRole_AspNetUsers");
         }
     }
+  
 }

@@ -10,7 +10,6 @@ namespace UniClub.Domain.Common.Interfaces
     {
         DbSet<Club> Clubs { get; }
         DbSet<ClubPeriod> ClubPeriods { get; }
-        DbSet<ClubRole> ClubRoles { get; }
         DbSet<Department> Departments { get; }
         DbSet<Event> Events { get; }
         DbSet<EventByClub> EventByClubs { get; }

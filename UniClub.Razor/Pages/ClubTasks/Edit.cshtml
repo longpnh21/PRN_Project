@@ -10,6 +10,12 @@
 
 <h4>Club Task</h4>
 <hr />
+@if(!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-warning" role="alert">
+      @Model.Message
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data">

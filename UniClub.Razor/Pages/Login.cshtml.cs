@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using UniClub.Domain.Entities;
@@ -56,9 +58,16 @@ namespace UniClub.Razor.Pages
                     throw new Exception("Invalid username/password");
 
                 var roles = await _userManager.GetRolesAsync(user);
-
+                var userClaims = await _userManager.GetClaimsAsync(user);
+                IList<string> claims = new List<string>();
+                foreach (var claim in userClaims)
+                {
+                    claims.Add($"{claim.Type}-{claim.Value}");
+                }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "user", user);
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "roles", roles);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "claims", claims);
+
                 return RedirectToPage("/index");
             }
             catch (Exception ex)

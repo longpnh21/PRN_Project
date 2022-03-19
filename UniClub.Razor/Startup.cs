@@ -11,6 +11,7 @@ using UniClub.Queries;
 using UniClub.Razor.Services;
 using UniClub.Razor.Utils;
 using UniClub.Services.Interfaces;
+using UniClub.Worker;
 
 namespace UniClub.Razor
 {
@@ -29,7 +30,7 @@ namespace UniClub.Razor
             services.AddEntityFrameworkCore(Configuration);
             services.AddApplication();
 
-            //services.AddWorkers();
+            services.AddWorkers();
             services.AddMediaRCommands();
             services.AddMediaRQueries();
 

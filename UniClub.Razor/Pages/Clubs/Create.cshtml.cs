@@ -5,9 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Clubs
 {
+    [AuthorizationFilter(Roles ="SchoolAdmin")]
     public class CreateModel : PageModel
     {
         private ISender _mediator;

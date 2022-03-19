@@ -59,7 +59,21 @@
                 <span asp-validation-for="UserDto.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="@Model.UserDto.Role" asp-items="Html.GetEnumSelectList<Role>()">
+                <select asp-for="@Model.UserDto.Role">
+                    <option value="@Role.SchoolAdmin">School Admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select asp-for="@Model.UniId">
+                    @{
+                        if(@Model.Universities != null)
+                        {
+                            foreach(var university in @Model.Universities.Items)
+                            {
+                                <option value="@university.Id">@university.UniName</option>
+                            }
+                        }
+                    }
                 </select>
             </div>
 

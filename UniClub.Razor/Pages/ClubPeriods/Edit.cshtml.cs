@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using UniClub.Domain.Common.Enums;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Update;
-
+using UniClub.Razor.Filters;
 namespace UniClub.Razor.Pages.ClubPeriods
 {
+    [AuthorizationFilter(Roles = "SchoolAdmin")]
     public class EditModel : PageModel
     {
         private ISender _mediator;

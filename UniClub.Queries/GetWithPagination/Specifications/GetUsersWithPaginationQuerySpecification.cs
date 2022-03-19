@@ -17,7 +17,7 @@ namespace UniClub.Queries.GetWithPagination.Specifications
 
             if (!string.IsNullOrWhiteSpace(query.SearchValue))
             {
-                SetFilterCondition((e => e.Id.ToString().Equals(query.SearchValue)
+                SetFilterCondition((e => e.Id.Equals(query.SearchValue)
                                         || EF.Functions.Collate(e.Name, "SQL_Latin1_General_CP1_CI_AI").Contains(query.SearchValue)
                                         || e.Email.Contains(query.SearchValue)
                                         || e.DateOfBirth.ToString().Equals(query.SearchValue)

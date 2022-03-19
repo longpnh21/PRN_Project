@@ -1,0 +1,63 @@
+﻿@page
+@model UniClub.Razor.Pages.Students.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+@if(!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-warning" role="alert">
+      @Model.Message
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserDto.Id" />
+            <input type="hidden" asp-for="UserDto.DepId" />
+            <input type="hidden" asp-for="UserDto.Role" />
+            <input type="hidden" asp-for="UserDto.Email" />
+            <div class="form-group">
+                <label asp-for="UserDto.Name" class="control-label"></label>
+                <input asp-for="UserDto.Name" class="form-control" />
+                <span asp-validation-for="UserDto.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserDto.Gender" class="control-label"></label>
+                <select asp-for="@Model.UserDto.Gender">
+                    <option value="@null">Choose your gender</option>
+                    <option value="@true">Male</option>
+                    <option value="@false">Female</option>
+                </select>
+                <span asp-validation-for="UserDto.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserDto.DateOfBirth" class="control-label"></label>
+                <input type="date" asp-for="UserDto.DateOfBirth" class="form-control" />
+                <span asp-validation-for="UserDto.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserDto.UploadedImage" class="control-label"></label>
+                <input type="file" asp-for="UserDto.UploadedImage" class="form-control" />
+                <span asp-validation-for="UserDto.UploadedImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

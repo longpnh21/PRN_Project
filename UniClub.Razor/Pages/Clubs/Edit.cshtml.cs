@@ -7,9 +7,11 @@ using System;
 using System.Threading.Tasks;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Update;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Clubs
 {
+    [AuthorizationFilter(Roles = "SchoolAdmin")]
     public class EditModel : PageModel
     {
         private ISender _mediator;

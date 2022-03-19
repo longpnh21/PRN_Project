@@ -9,6 +9,12 @@
 
 <h4>Department</h4>
 <hr />
+@if(!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-warning" role="alert">
+      @Model.Message
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data">
@@ -16,7 +22,9 @@
             <input type="hidden" asp-for="Department.Id" />
             <div class="form-group">
                 <label asp-for="Department.UniId" class="control-label">University Name</label>
-                <select asp-for="Department.UniId" class="form-control" asp-items="ViewBag.UniId"></select>
+                <select asp-for="Department.UniId">
+                    <option value="@Model.University.Id">@Model.University.UniName</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Department.DepName" class="control-label"></label>

@@ -4,20 +4,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.GetWithPagination;
 using UniClub.Dtos.Update;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Events
 {
+    [AuthorizationFilter(Roles = "ClubAdmin")]
     public class EditModel : PageModel
     {
+
         private ISender _mediator;
         private readonly IMapper _mapper;
 
-
+        public string Message { get; set; }
         protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
         public EditModel(IMapper mapper)
         {
@@ -44,14 +48,23 @@ namespace UniClub.Razor.Pages.Events
         public UpdateEventDto Event { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                await Mediator.Send(Event);
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+                Message.Replace("--", "--\n");
                 return Page();
             }
-
-            await Mediator.Send(Event);
-
-            return RedirectToPage("./Index");
         }
     }
 }

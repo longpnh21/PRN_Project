@@ -17,7 +17,7 @@ namespace UniClub.Queries.GetWithPagination.Specifications
 
             if (!string.IsNullOrWhiteSpace(query.SearchValue))
             {
-                SetFilterCondition(e => e.MemberId.ToString().Equals(query.SearchValue)
+                SetFilterCondition(e => e.MemberId.Equals(query.SearchValue)
                                     || EF.Functions.Collate(e.Member.Name, "SQL_Latin1_General_CP1_CI_AI").Contains(query.SearchValue)
                                     || e.Status.ToString().Equals(query.SearchValue));
             }

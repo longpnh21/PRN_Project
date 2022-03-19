@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using UniClub.Dtos.Create;
@@ -45,19 +46,33 @@ namespace UniClub.Razor.Pages.ClubTasks
 
             return Page();
         }
+        public string Message { get; set; }
 
         [BindProperty]
         public UpdateClubTaskDto ClubTask { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                if (Dto.StartDate > Dto.EndDate)
+                {
+                    throw new Exception("StartDate must be before EndDate");
+                }
+
+                await Mediator.Send(ClubTask);
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+                Message.Replace("--", "--\n");
                 return Page();
             }
-
-            await Mediator.Send(ClubTask);
-
-            return RedirectToPage("./Index");
         }
     }
 }

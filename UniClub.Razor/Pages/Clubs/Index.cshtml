@@ -16,7 +16,6 @@
     <div class="form-actions no-color">
         <p>
             Search:
-            <input asp-for="@Model.Dto.UniId" hidden/>
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
             <select asp-for="@Model.Dto.OrderBy" asp-items="Html.GetEnumSelectList<ClubProperties>()">
             </select> |
@@ -107,7 +106,6 @@
 <div>
     <form asp-page="./Index" method="get">
         <div hidden>
-            <input asp-for="@Model.Dto.UniId"/>
             <input type="text" asp-for="@Model.Dto.SearchValue" /> |
             <input asp-for="@Model.Dto.OrderBy" /> 
             <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>
@@ -119,7 +117,6 @@
 
     <form asp-page="./Index" method="get">
         <div hidden>
-            <input asp-for="@Model.Dto.UniId"/>
             <input type="text" asp-for="@Model.Dto.SearchValue" />
             <input asp-for="@Model.Dto.OrderBy" /> 
             <input type="checkbox" asp-for="@Model.Dto.IsAscending"/>

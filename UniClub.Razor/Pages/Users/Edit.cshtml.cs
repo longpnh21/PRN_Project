@@ -7,10 +7,12 @@ using System;
 using System.Threading.Tasks;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Update;
+using UniClub.Razor.Filters;
 using UniClub.Razor.Utils;
 
 namespace UniClub.Razor.Pages.Users
 {
+    [AuthorizationFilter(Roles = "SystemAdministrator")]
     public class EditModel : PageModel
     {
         private ISender _mediator;
@@ -48,7 +50,7 @@ namespace UniClub.Razor.Pages.Users
                 {
                     return Page();
                 }
-                if (EmailValidator.IsValidEmail(UserDto.Email))
+                if (!EmailValidator.IsValidEmail(UserDto.Email))
                 {
                     throw new Exception("Invalid email");
                 }

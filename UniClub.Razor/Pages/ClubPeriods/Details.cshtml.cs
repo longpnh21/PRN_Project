@@ -12,6 +12,7 @@ using UniClub.Dtos.Update;
 
 namespace UniClub.Razor.Pages.ClubPeriods
 {
+
     public class DetailsModel : PageModel
     {
         private ISender _mediator;

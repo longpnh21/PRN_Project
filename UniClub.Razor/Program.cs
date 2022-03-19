@@ -25,10 +25,10 @@ namespace UniClub.Razor
                 {
                     var context = services.GetRequiredService<UniClubContext>();
 
-                    if (context.Database.IsSqlServer())
-                    {
-                        context.Database.Migrate();
-                    }
+                    //if (context.Database.IsSqlServer())
+                    //{
+                    //    context.Database.Migrate();
+                    //}
 
                     var userManager = services.GetRequiredService<UserManager<Person>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();

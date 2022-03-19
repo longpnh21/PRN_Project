@@ -6,9 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Universities
 {
+    [AuthorizationFilter(Roles = "SystemAdministrator")]
     public class DetailsModel : PageModel
     {
         private ISender _mediator;

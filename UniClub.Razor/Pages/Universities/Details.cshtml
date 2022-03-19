@@ -1,4 +1,5 @@
 ﻿@page
+@using UniClub.Razor.Utils
 @model UniClub.Razor.Pages.Universities.DetailsModel
 
 @{
@@ -62,6 +63,18 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.University.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    @{
+        var roles = SessionHelper.GetObjectFromJson<List<string>>(HttpContext.Session, "roles");
+        if(roles.Any(r => r.Contains("SchoolAdmin")))
+        {
+             <a asp-page="/Clubs/Index" asp-route-uniid="@Model.University.Id">Go to club management</a>
+             <a asp-page="/Department/Index" asp-route-uniid="@Model.University.Id">Go to club management</a>
+        }
+        if(roles.Any(r => r.Contains("SystemAdministrator")))
+        {
+            <a asp-page="./Edit" asp-route-id="@Model.University.Id">Edit</a> <div> | </div>
+            <a asp-page="./Index">Back to List</a>
+        }
+    }
+    
 </div>

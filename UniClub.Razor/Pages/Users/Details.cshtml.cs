@@ -6,11 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using UniClub.Dtos.GetById;
 using UniClub.Dtos.Response;
+using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Users
 {
+    [AuthorizationFilter]
     public class DetailsModel : PageModel
     {
+        
         private ISender _mediator;
         private readonly IMapper _mapper;
 

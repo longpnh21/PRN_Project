@@ -7,8 +7,7 @@ namespace UniClub.Dtos.Response
     {
         public string StudentId { get; set; }
         public string Name { get; set; }
-        public int ClubRoleId { get; set; }
-        public string Role { get; set; }
+        public ClubRole Role { get; set; }
         public MemberRoleStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }

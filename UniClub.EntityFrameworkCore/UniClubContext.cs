@@ -27,7 +27,6 @@ namespace UniClub.EntityFrameworkCore
 
         public DbSet<Club> Clubs => Set<Club>();
         public DbSet<ClubPeriod> ClubPeriods => Set<ClubPeriod>();
-        public DbSet<ClubRole> ClubRoles => Set<ClubRole>();
         public DbSet<Department> Departments => Set<Department>();
         public DbSet<Event> Events => Set<Event>();
         public DbSet<EventByClub> EventByClubs => Set<EventByClub>();
