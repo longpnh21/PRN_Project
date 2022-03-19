@@ -14,7 +14,7 @@ using UniClub.Razor.Utils;
 
 namespace UniClub.Razor.Pages.MemberRoles
 {
-    [AuthorizationFilter(Roles = "ClubAdmin")
+    [AuthorizationFilter(Roles = "ClubAdmin")]
     public class IndexModel : PageModel
     {
         private ISender _mediator;
