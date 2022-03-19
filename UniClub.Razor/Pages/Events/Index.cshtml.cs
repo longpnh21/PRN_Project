@@ -13,7 +13,7 @@ using UniClub.Razor.Filters;
 
 namespace UniClub.Razor.Pages.Events
 {
-    [AuthorizationFilter(Roles = "ClubAdmin")]
+    [AuthorizationFilter(Roles = "ClubAdmin Student")]
     public class IndexModel : PageModel
     {
 
